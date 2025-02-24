@@ -19,17 +19,27 @@
                     <td>{{ $blog->date }}</td>
                 </tr>
                 <tr>
-                    <th>Title</th>
-                    <td>{{ $blog->title }}</td>
+                    <th>Title (Eng)</th>
+                    <td>{{ $blog->title_eng }}</td>
+                </tr>
+                <tr>
+                    <th>Title (MM)</th>
+                    <td>{{ $blog->title_mm }}</td>
                 </tr>
                 <tr>
                     <th>Image</th>
                     <td><img src="{{ asset('storage').$blog->images[0]->image }}" width="200"  /></td>
                 </tr>
                 <tr>
-                    <th>Content</th>
+                    <th>Content (Eng)</th>
                     <td>
-                        {!! $blog->content !!}
+                        {!! $blog->content_eng !!}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Content (MM)</th>
+                    <td>
+                        {!! $blog->content_mm !!}
                     </td>
                 </tr>
             </table>

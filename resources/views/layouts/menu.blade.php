@@ -62,6 +62,31 @@
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Setting</span>
         </li>
+
+        {{-- content management  --}}
+        @php
+            $activity = Request::is('admin/content-management/*') ? 'active open' : '';
+        @endphp
+        <li class="menu-item {{ $activity }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-news"></i>
+                <div data-i18n="Account Settings">Content Management</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{ request()->is('admin/content-management/success-rate') || request()->is('admin/content-management/success-rate/*') ? 'active open' : '' }}"">
+                    <a href="{{route('admin.success-rate.index')}}" class="menu-link">
+                        <div data-i18n="Account">Success Rate</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ request()->is('admin/content-management/success-story') || request()->is('admin/content-management/success-story/*') ? 'active open' : '' }}"">
+                    <a href="{{route('admin.success-story.index')}}" class="menu-link">
+                        <div data-i18n="Account">Success Story</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        {{-- activity management  --}}
         @php
             $activity = Request::is('admin/activity-management/*') ? 'active open' : '';
         @endphp

@@ -1,6 +1,6 @@
 $(document).ready(function() {
     let contentEditor;
-    let content = document.querySelectorAll('.content');
+    let content = document.querySelectorAll('.cke-editor');
     if(content) {
         content.forEach(item => {
             ClassicEditor
@@ -31,34 +31,30 @@ $(document).ready(function() {
         processing: true,
         responsive: true,
         serverSide: true,
-        ajax: '/admin/activity-management/blogs/datatable-lists',
+        ajax: '/admin/content-management/success-rate/datatable-lists',
         columns: [{
                 data: 'plus-icon',
                 name: 'plus-icon'
             },
             {
-                data: 'date',
-                name: 'date'
+                data: 'order_number',
+                name: 'order_number'
             },
             {
-                data: 'title_eng',
-                name: 'title_eng'
+                data: 'rate_count_eng',
+                name: 'rate_count_eng'
             },
             {
-                data: 'title_mm',
-                name: 'title_mm'
+                data: 'rate_count_mm',
+                name: 'rate_count_mm'
             },
             {
-                data: 'image',
-                name: 'image'
+                data: 'description_eng',
+                name: 'description_eng'
             },
             {
-                data: 'content_eng',
-                name: 'content_eng'
-            },
-            {
-                data: 'content_mm',
-                name: 'content_mm'
+                data: 'description_mm',
+                name: 'description_mm'
             },
             {
                 data: 'action',
@@ -76,7 +72,7 @@ $(document).ready(function() {
     })
 
     //submit create form
-    $(document).on('submit', '#blog_create_form', function(e) {
+    $(document).on('submit', '#success_rate_create_form', function(e) {
         e.preventDefault();
 
         const field_status = check_fields_validation();
@@ -86,10 +82,10 @@ $(document).ready(function() {
 
         ask_confirm().then(result => {
             if(result.isConfirmed) {
-                let formData = new FormData($('#blog_create_form')[0]);
+                let formData = new FormData($('#success_rate_create_form')[0]);
 
                 $.ajax({
-                    url: "/admin/activity-management/blogs",
+                    url: "/admin/content-management/success-rate",
                     type: "POST",
                     data: formData,
                     processData: false,
@@ -102,7 +98,7 @@ $(document).ready(function() {
                     success: function (res) {
                         console.log(res);
                         if (res == "success") {
-                            window.location.href = "/admin/activity-management/blogs";
+                            window.location.href = "/admin/content-management/success-rate";
                         }
                     },
                     error: function (xhr, status, err) {
@@ -137,7 +133,7 @@ $(document).ready(function() {
     })
 
     //submit edit form
-    $(document).on('submit', '#blog_edit_form', function(e) {
+    $(document).on('submit', '#success_rate_edit_form', function(e) {
         e.preventDefault();
 
         const field_status = check_fields_validation();
@@ -147,11 +143,11 @@ $(document).ready(function() {
 
         ask_confirm().then(result => {
             if(result.isConfirmed) {
-                let formData = new FormData($('#blog_edit_form')[0]);
-                let id = $('#blog_id').val();
+                let formData = new FormData($('#success_rate_edit_form')[0]);
+                let id = $('#success_rate_id').val();
 
                 $.ajax({
-                    url: "/admin/activity-management/update-blogs/"+id,
+                    url: "/admin/content-management/update-success-rate/"+id,
                     type: "POST",
                     data: formData,
                     processData: false,
@@ -164,7 +160,7 @@ $(document).ready(function() {
                     success: function (res) {
                         console.log(res);
                         if (res == "success") {
-                            window.location.href = "/admin/activity-management/blogs";
+                            window.location.href = "/admin/content-management/success-rate";
                         }
                     },
                     error: function (xhr, status, err) {
@@ -212,7 +208,7 @@ $(document).ready(function() {
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
-                    url: "/admin/activity-management/blogs/" + id,
+                    url: "/admin/content-management/success-rate/" + id,
                     type: "DELETE",
                     data: {
                         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -234,15 +230,12 @@ $(document).ready(function() {
     const check_fields_validation = () => {
         let status = true;
 
-        let blog_id = $('#blog_id').val();
-
         let names = [
-            "date",
-            "title_eng",
-            "title_mm",
-            blog_id ? null : "image",
-            "content_eng",
-            "content_mm",
+            "rate_count_eng",
+            "rate_count_mm",
+            "order_number",
+            "description_eng",
+            "description_mm"
         ];
 
         let err = [];

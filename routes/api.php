@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\BlogController;
+use App\Http\Controllers\Api\V1\SuccessRateController;
+use App\Http\Controllers\Api\V1\SuccessStoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,4 +24,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group(['prefix' => 'v1'], function () {
     //blog
     Route::get('blogs', [BlogController::class, 'index']);
+
+    // success rate
+    Route::get('success-rates', [SuccessRateController::class, 'index']);
+
+    // success story
+    Route::get('success-stories', [SuccessStoryController::class, 'index']);
 });

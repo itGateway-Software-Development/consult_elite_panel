@@ -6,6 +6,8 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\RolesController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\ActivityManagement\BlogController;
+use App\Http\Controllers\Admin\ContentManagement\SuccessRateController;
+use App\Http\Controllers\Admin\ContentManagement\SuccessStoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,7 +36,22 @@ Route::group(['middleware' => ['auth', 'prevent-back-history'], 'prefix' => 'adm
     Route::get('/users-datatable', [UserController::class, 'dataTable']);
     Route::resource('users', UserController::class);
 
+    // content management
+    Route::group(['prefix' => 'content-management'], function() {
+        //success rate
+        Route::post('update-success-rate/{successRate}', [SuccessRateController::class, 'updateSuccessRate']);
+        Route::get('/success-rate/datatable-lists', [SuccessRateController::class, 'successRateLists']);
+        Route::resource('success-rate', SuccessRateController::class);
+
+        // success story
+        Route::post('update-success-story/{successStory}', [SuccessStoryController::class, 'updateSuccessStory']);
+        Route::get('/success-story/datatable-lists', [SuccessStoryController::class, 'successStoryLists']);
+        Route::resource('success-story', SuccessStoryController::class);
+    });
+
+    // activity management
     Route::group(['prefix' => 'activity-management'], function() {
+        //blog
         Route::post('/update-blogs/{blog}', [BlogController::class, 'updateBlog']);
         Route::get('blogs/datatable-lists', [BlogController::class, 'blogLists']);
         Route::resource('blogs', BlogController::class);

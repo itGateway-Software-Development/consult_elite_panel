@@ -13,9 +13,17 @@
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12 col-12">
             <div class="form-group mb-4">
-                <label for="">Title <span class="text-danger">*</span></label>
-                <input type="text" name="title" class="form-control title" value="{{isset($blog) ? $blog->title : old('title')}}">
-                <span class="text-danger title_err"></span>
+                <label for="">Title (ENG) <span class="text-danger">*</span></label>
+                <input type="text" name="title_eng" class="form-control title_eng" value="{{isset($blog) ? $blog->title_eng : old('title_eng')}}">
+                <span class="text-danger title_eng_err"></span>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+            <div class="form-group mb-4">
+                <label for="">Title (MM) <span class="text-danger">*</span></label>
+                <input type="text" name="title_mm" class="form-control title_mm" value="{{isset($blog) ? $blog->title_mm : old('title_mm')}}">
+                <span class="text-danger title_mm_err"></span>
             </div>
         </div>
 
@@ -27,12 +35,21 @@
                 <img src="{{isset($blog) ? asset('storage').$blog->images[0]->image : ''}}" class="mt-2" width="150"  style="object-fit: cover;" alt="" id="preview_img">
             </div>
         </div>
+    </div>
 
-        <div class="col-md-8 col-sm-12 col-12">
+    <div class="row ">
+        <div class="col-md-6 col-sm-12 col-12">
             <div class="form-group mb-4">
-                <label for="">Content</label>
-                <textarea name="content" id="content" cols="30" rows="5" class="form-control cke-editor content">{{isset($blog) ? $blog->content : old('content')}}</textarea>
-                <span class="text-danger content_err"></span>
+                <label for="">Content (ENG)</label>
+                <textarea name="content_eng" id="content_eng" cols="30" rows="5" class="form-control cke-editor content_eng content">{{isset($blog) ? $blog->content_eng : old('content_eng')}}</textarea>
+                <span class="text-danger content_eng_err"></span>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12 col-12">
+            <div class="form-group mb-4">
+                <label for="">Content (MM)</label>
+                <textarea name="content_mm" id="content_mm" cols="30" rows="5" class="form-control cke-editor content_mm content">{{isset($blog) ? $blog->content_mm : old('content_mm')}}</textarea>
+                <span class="text-danger content_mm_err"></span>
             </div>
         </div>
     </div>

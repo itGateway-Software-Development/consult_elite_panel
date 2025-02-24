@@ -9,7 +9,7 @@
     <div class="card mt-3 p-4">
         <span class="mb-4">Blog Edition</span>
 
-       @include('admin.blog.form')
+       @include('admin.activity-management.blog.form')
     </div>
 @endsection
 

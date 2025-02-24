@@ -17,12 +17,12 @@ class BlogController extends Controller
      */
     public function index()
     {
-        return view('admin.blog.index');
+        return view('admin.activity-management.blog.index');
     }
 
     public function blogLists()
     {
-        $data = Blog::with('images');
+        $data = Blog::with('images')->orderBy('id', 'desc');
 
         return Datatables::of($data)
             ->editColumn('plus-icon', function ($each) {
@@ -38,11 +38,15 @@ class BlogController extends Controller
                 return $image;
             })
 
-            ->editColumn('content', function($each) {
+            ->editColumn('content_eng', function($each) {
                 $plainText = strip_tags($each->content);
                 return mb_substr($plainText, 0, 200) . ' ...';
             })
 
+            ->editColumn('content_mm', function($each) {
+                $plainText = strip_tags($each->content);
+                return mb_substr($plainText, 0, 200) . ' ...';
+            })
 
             ->addColumn('action', function ($each) {
 
@@ -70,7 +74,7 @@ class BlogController extends Controller
      */
     public function create()
     {
-        return view('admin.blog.create');
+        return view('admin.activity-management.blog.create');
     }
 
     /**
@@ -82,9 +86,11 @@ class BlogController extends Controller
 
         try {
             $blog = new Blog();
-            $blog->title = $request->title;
+            $blog->title_eng = $request->title_eng;
+            $blog->title_mm = $request->title_mm;
             $blog->date = $request->date;
-            $blog->content = $request->content;
+            $blog->content_eng = $request->content_eng;
+            $blog->content_mm = $request->content_mm;
             $blog->save();
 
             if ($request->file('image')) {
@@ -112,7 +118,7 @@ class BlogController extends Controller
     public function show(Blog $blog)
     {
         $blog = $blog->load('images');
-        return view('admin.blog.show', compact('blog'));
+        return view('admin.activity-management.blog.show', compact('blog'));
     }
 
     /**
@@ -120,7 +126,7 @@ class BlogController extends Controller
      */
     public function edit(Blog $blog)
     {
-        return view('admin.blog.edit', compact('blog'));
+        return view('admin.activity-management.blog.edit', compact('blog'));
     }
 
     /**
@@ -131,9 +137,11 @@ class BlogController extends Controller
         DB::beginTransaction();
 
         try {
-            $blog->title = $request->title;
+            $blog->title_eng = $request->title_eng;
+            $blog->title_mm = $request->title_mm;
             $blog->date = $request->date;
-            $blog->content = $request->content;
+            $blog->content_eng = $request->content_eng;
+            $blog->content_mm = $request->content_mm;
             $blog->update();
 
             $fileName = null;

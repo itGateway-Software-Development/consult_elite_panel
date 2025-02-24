@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('blogs', function (Blueprint $table) {
+        Schema::create('success_rates', function (Blueprint $table) {
             $table->id();
-            $table->string('title_eng', 100);
-            $table->string('title_mm', 100);
-            $table->date('date');
-            $table->text('content_eng');
-            $table->text('content_mm');
+            $table->string('rate_count_eng', 20);
+            $table->string('rate_count_mm', 20);
+            $table->string('description_eng');
+            $table->string('description_mm');
+            $table->integer('order_number');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('blogs');
+        Schema::dropIfExists('success_rates');
     }
 };

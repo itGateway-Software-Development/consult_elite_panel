@@ -21,9 +21,11 @@
                 <thead>
                     <th class="no-sort"></th>
                     <th>Date</th>
-                    <th>Title</th>
-                    <th>Image</th>
-                    <th>Content</th>
+                    <th>Title (Eng)</th>
+                    <th>Title (MM)</th>
+                    <th class="no-sort">Image</th>
+                    <th>Content (Eng)</th>
+                    <th>Content (MM)</th>
                     <th class="no-sort text-nowrap">Action</th>
                 </thead>
                 <tbody>
